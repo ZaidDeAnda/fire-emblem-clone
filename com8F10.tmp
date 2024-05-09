@@ -1,0 +1,112 @@
+[gd_scene load_steps=9 format=3 uid="uid://dctm0knd0621h"]
+
+[ext_resource type="Script" path="res://combat.gd" id="1_hbo15"]
+[ext_resource type="Script" path="res://BaseCharacter.gd" id="2_nia03"]
+
+[sub_resource type="Gradient" id="Gradient_xgent"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_woc64"]
+gradient = SubResource("Gradient_xgent")
+
+[sub_resource type="Gradient" id="Gradient_c8wxg"]
+offsets = PackedFloat32Array(0, 0.016129)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.842439, 0.781426, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tr188"]
+gradient = SubResource("Gradient_c8wxg")
+
+[sub_resource type="Gradient" id="Gradient_kd2qt"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gu8qu"]
+gradient = SubResource("Gradient_kd2qt")
+
+[node name="Combat" type="Node2D" node_paths=PackedStringArray("CharacterLeft", "CharacterRight")]
+script = ExtResource("1_hbo15")
+CharacterLeft = NodePath("Char1")
+CharacterRight = NodePath("Char2")
+
+[node name="Char1" type="Node2D" parent="."]
+script = ExtResource("2_nia03")
+health = 10
+attack = 5
+defense = 5
+speed = 5
+
+[node name="HealthBar" type="TextureProgressBar" parent="Char1"]
+offset_left = 152.0
+offset_top = 80.0
+offset_right = 344.0
+offset_bottom = 144.0
+max_value = 5.0
+value = 5.0
+fill_mode = 1
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_woc64")
+texture_over = SubResource("GradientTexture2D_tr188")
+texture_progress = SubResource("GradientTexture2D_gu8qu")
+
+[node name="Label" type="Label" parent="Char1"]
+visible = false
+offset_left = 136.0
+offset_top = 88.0
+offset_right = 176.0
+offset_bottom = 111.0
+
+[node name="Char2" type="Node2D" parent="."]
+script = ExtResource("2_nia03")
+health = 10
+attack = 5
+defense = 5
+speed = 5
+
+[node name="HealthBar" type="TextureProgressBar" parent="Char2"]
+offset_left = 792.0
+offset_top = 80.0
+offset_right = 984.0
+offset_bottom = 144.0
+max_value = 5.0
+value = 5.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_woc64")
+texture_over = SubResource("GradientTexture2D_tr188")
+texture_progress = SubResource("GradientTexture2D_gu8qu")
+
+[node name="Base" type="Polygon2D" parent="."]
+position = Vector2(-64, 0)
+color = Color(0.192157, 0.192157, 0.192157, 1)
+polygon = PackedVector2Array(192, 576, 384, 352, 896, 352, 1088, 576)
+
+[node name="Char1Scores" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(128, 64, 384, 64, 384, 192, 128, 192)
+
+[node name="DamageBar" type="Polygon2D" parent="Char1Scores"]
+visible = false
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(152, 88, 368, 88, 368, 120, 152, 120)
+
+[node name="HealthBar" type="Polygon2D" parent="Char1Scores"]
+visible = false
+position = Vector2(152, 88)
+color = Color(0, 1, 0, 1)
+offset = Vector2(-152, -88)
+polygon = PackedVector2Array(152, 88, 368, 88, 368, 120, 152, 120)
+
+[node name="Char2Scores" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(640, 0)
+polygon = PackedVector2Array(128, 64, 384, 64, 384, 192, 128, 192)
+
+[node name="DamageBar" type="Polygon2D" parent="Char2Scores"]
+visible = false
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(152, 88, 368, 88, 368, 120, 152, 120)
+
+[node name="HealthBar" type="Polygon2D" parent="Char2Scores"]
+visible = false
+position = Vector2(152, 88)
+color = Color(0, 1, 0, 1)
+offset = Vector2(-152, -88)
+polygon = PackedVector2Array(152, 88, 368, 88, 368, 120, 152, 120)

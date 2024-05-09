@@ -1,0 +1,139 @@
+[gd_scene load_steps=11 format=3 uid="uid://dctm0knd0621h"]
+
+[ext_resource type="Script" path="res://combat.gd" id="1_hbo15"]
+[ext_resource type="Script" path="res://BaseCharacter.gd" id="2_nia03"]
+[ext_resource type="Script" path="res://Label.gd" id="3_cioh1"]
+[ext_resource type="Script" path="res://AttackLabel.gd" id="4_c36t2"]
+
+[sub_resource type="Gradient" id="Gradient_kd2qt"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gu8qu"]
+gradient = SubResource("Gradient_kd2qt")
+
+[sub_resource type="Gradient" id="Gradient_c8wxg"]
+offsets = PackedFloat32Array(0, 0.016129)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.842439, 0.781426, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tr188"]
+gradient = SubResource("Gradient_c8wxg")
+
+[sub_resource type="LabelSettings" id="LabelSettings_wberw"]
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_15p4w"]
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Combat" type="Node2D" node_paths=PackedStringArray("CharacterLeft", "CharacterRight")]
+script = ExtResource("1_hbo15")
+CharacterLeft = NodePath("Char1")
+CharacterRight = NodePath("Char2")
+
+[node name="Char1" type="Node2D" parent="."]
+script = ExtResource("2_nia03")
+health = 10
+attack = 5
+defense = 5
+speed = 5
+
+[node name="Scores" type="Polygon2D" parent="Char1"]
+color = Color(0, 0.270588, 0, 1)
+polygon = PackedVector2Array(128, 64, 384, 64, 384, 192, 128, 192)
+
+[node name="HealthBar" type="TextureProgressBar" parent="Char1/Scores"]
+offset_left = 152.0
+offset_top = 80.0
+offset_right = 344.0
+offset_bottom = 112.0
+max_value = 5.0
+value = 5.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+texture_under = SubResource("GradientTexture2D_gu8qu")
+texture_progress = SubResource("GradientTexture2D_tr188")
+
+[node name="HealthLabel" type="Label" parent="Char1/Scores" node_paths=PackedStringArray("Character")]
+offset_left = 160.0
+offset_top = 80.0
+offset_right = 209.0
+offset_bottom = 103.0
+text = "attack
+"
+label_settings = SubResource("LabelSettings_wberw")
+script = ExtResource("3_cioh1")
+Character = NodePath("../..")
+
+[node name="AttackLabel" type="Label" parent="Char1/Scores" node_paths=PackedStringArray("Character")]
+offset_left = 152.0
+offset_top = 136.0
+offset_right = 192.0
+offset_bottom = 159.0
+script = ExtResource("4_c36t2")
+Character = NodePath("../..")
+
+[node name="Char2" type="Node2D" parent="."]
+script = ExtResource("2_nia03")
+health = 10
+attack = 5
+defense = 5
+speed = 5
+
+[node name="Scores" type="Polygon2D" parent="Char2"]
+position = Vector2(640, 0)
+color = Color(0, 0.211765, 0, 1)
+polygon = PackedVector2Array(128, 64, 384, 64, 384, 192, 128, 192)
+
+[node name="HealthBar" type="TextureProgressBar" parent="Char2/Scores"]
+offset_left = 152.0
+offset_top = 80.0
+offset_right = 344.0
+offset_bottom = 112.0
+max_value = 5.0
+value = 5.0
+nine_patch_stretch = true
+stretch_margin_left = 2
+texture_under = SubResource("GradientTexture2D_gu8qu")
+texture_progress = SubResource("GradientTexture2D_tr188")
+
+[node name="AttackLabel" type="Label" parent="Char2/Scores" node_paths=PackedStringArray("Character")]
+offset_left = 152.0
+offset_top = 144.0
+offset_right = 192.0
+offset_bottom = 167.0
+script = ExtResource("4_c36t2")
+Character = NodePath("../..")
+
+[node name="HealthLabel" type="Label" parent="Char2/Scores" node_paths=PackedStringArray("Character")]
+offset_left = 160.0
+offset_top = 80.0
+offset_right = 209.0
+offset_bottom = 103.0
+text = "attack
+"
+label_settings = SubResource("LabelSettings_15p4w")
+script = ExtResource("3_cioh1")
+Character = NodePath("../..")
+
+[node name="Base" type="Polygon2D" parent="."]
+position = Vector2(-64, 0)
+color = Color(0.192157, 0.192157, 0.192157, 1)
+polygon = PackedVector2Array(192, 576, 384, 352, 896, 352, 1088, 576)
+
+[node name="AtkR" type="Button" parent="."]
+offset_left = 888.0
+offset_top = 256.0
+offset_right = 977.0
+offset_bottom = 304.0
+text = "Atacar der"
+
+[node name="AtkL" type="Button" parent="."]
+offset_left = 208.0
+offset_top = 256.0
+offset_right = 296.0
+offset_bottom = 304.0
+text = "Atacar izq"
+
+[connection signal="pressed" from="AtkR" to="." method="_on_atk_r_pressed"]
+[connection signal="pressed" from="AtkL" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="AtkL" to="." method="_on_atk_l_pressed"]

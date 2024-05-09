@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://dctm0knd0621h"]
+
+[ext_resource type="Script" path="res://combat.gd" id="1_hbo15"]
+[ext_resource type="Script" path="res://BaseCharacter.gd" id="2_nia03"]
+
+[node name="Combat" type="Node2D" node_paths=PackedStringArray("CharacterLeft", "CharacterRight")]
+script = ExtResource("1_hbo15")
+CharacterLeft = NodePath("Char1")
+CharacterRight = NodePath("Char2")
+
+[node name="Char1" type="Node2D" parent="."]
+script = ExtResource("2_nia03")
+health = 10
+attack = 5
+defense = 5
+speed = 5
+
+[node name="Char2" type="Node2D" parent="."]
+script = ExtResource("2_nia03")
+health = 10
+attack = 5
+defense = 5
+speed = 5
+
+[node name="Base" type="Polygon2D" parent="."]
+position = Vector2(-64, 0)
+color = Color(0.192157, 0.192157, 0.192157, 1)
+polygon = PackedVector2Array(192, 576, 384, 352, 896, 352, 1088, 576)
+
+[node name="Char1Scores" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(128, 64, 384, 64, 384, 192, 128, 192)
+
+[node name="DamageBar" type="Polygon2D" parent="Char1Scores"]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(152, 88, 368, 88, 368, 120, 152, 120)
+
+[node name="HealthBar" type="Polygon2D" parent="Char1Scores"]
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(152, 88, 368, 88, 368, 120, 152, 120)
+
+[node name="Char2Scores" type="Polygon2D" parent="."]
+position = Vector2(640, 0)
+polygon = PackedVector2Array(128, 64, 384, 64, 384, 192, 128, 192)
+
+[node name="DamageBar" type="Polygon2D" parent="Char2Scores"]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(152, 88, 368, 88, 368, 120, 152, 120)
+
+[node name="HealthBar" type="Polygon2D" parent="Char2Scores"]
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(152, 88, 368, 88, 368, 120, 152, 120)
